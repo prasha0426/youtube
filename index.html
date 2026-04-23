@@ -1,30 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Watch Together</title>
+  <title>Watch Together 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    button {
+      transition: all 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
-<body>
 
-<h2>🎬 Watch Together (YouTube Sync)</h2>
+<body class="bg-[#0F172A] text-white">
 
-<!-- 🎥 YouTube Player -->
-<div id="player"></div>
+<div class="flex flex-col md:flex-row h-screen">
 
-<br>
+  <!-- 🎬 VIDEO -->
+  <div class="md:w-2/3 w-full p-4 flex flex-col">
 
-<!-- 🎯 Video Input -->
-<input id="youtubeUrl" placeholder="Paste YouTube link here">
-<button onclick="loadVideo()">Load Video</button>
+    <h1 class="text-2xl font-bold text-pink-400 mb-2">💖 Watch Together</h1>
+    <p class="text-sm text-gray-400 mb-2">Connected ❤️</p>
 
-<hr>
+    <!-- ✅ YOUTUBE PLAYER -->
+    <div id="player" class="w-full aspect-video rounded-2xl border mb-3"></div>
 
-<!-- 💬 Chat -->
-<div id="chatBox" style="height:150px;overflow:auto;border:1px solid black;"></div>
-<input id="msg" placeholder="Type message">
-<button onclick="sendMsg()">Send</button>
+    <!-- ✅ INPUT -->
+    <input id="youtubeLink"
+      placeholder="Paste YouTube link"
+      class="p-2 bg-gray-800 rounded-lg mb-3"/>
 
-<script src="/socket.io/socket.io.js"></script>
+    <button onclick="loadYouTube()"
+      class="bg-pink-500 px-4 py-2 rounded-lg mb-3">
+      Load Video
+    </button>
+
+    <div class="flex gap-2">
+      <input id="roomInput" placeholder="Room ID" class="flex-1 p-2 bg-gray-800 rounded-lg"/>
+      <button onclick="joinRoom()" class="bg-pink-500 px-4 rounded-lg">Join</button>
+    </div>
+
+    <button onclick="leaveRoom()"
+      class="bg-red-500 px-4 py-2 rounded-lg ml-2 hover:bg-red-600">
+      Leave
+    </button>
+
+    <p id="syncStatus" class="text-green-400 mt-2">In Sync ✅</p>
+
+  </div>
+
+  <!-- 💬 SIDE -->
+  <div class="md:w-1/3 w-full bg-[#1E293B] p-4 flex flex-col">
+
+    <!-- 🎥 VIDEO CALL -->
+    <div class="mb-4">
+      <h2 class="text-pink-400 mb-2">💑 Partner</h2>
+
+      <div class="relative">
+        <div class="w-full aspect-video bg-black rounded-xl overflow-hidden">
+          <video id="partnerVideo" autoplay class="w-full h-full object-contain"></video>
+        </div>
+
+        <video id="myVideo" autoplay muted
+          class="w-24 h-24 object-contain bg-black rounded-lg border">
+        </video>
+      </div>
+
+      <div class="flex gap-2 mt-2">
+        <button onclick="toggleMic()" class="bg-gray-700 px-2 rounded">🎤</button>
+        <button onclick="toggleCamera()" class="bg-gray-700 px-2 rounded">📷</button>
+      </div>
+    </div>
+
+    <!-- 💬 CHAT -->
+    <div id="chat" class="flex-1 overflow-y-auto space-y-2 mb-3 p-2"></div>
+
+    <div class="flex gap-2">
+      <input id="messageInput" class="flex-1 p-2 bg-gray-800 rounded-lg" placeholder="Message..."/>
+      <button onclick="sendMessage()" class="bg-purple-500 px-3 rounded-lg">Send</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+
+<!-- ✅ IMPORTANT -->
 <script src="https://www.youtube.com/iframe_api"></script>
+
 <script src="script.js"></script>
 
 </body>
