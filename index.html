@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Watch Together</title>
+</head>
+<body>
+
+<h2>🎬 Watch Together (YouTube Sync)</h2>
+
+<!-- 🎥 YouTube Player -->
+<div id="player"></div>
+
+<br>
+
+<!-- 🎯 Video Input -->
+<input id="youtubeUrl" placeholder="Paste YouTube link here">
+<button onclick="loadVideo()">Load Video</button>
+
+<hr>
+
+<!-- 💬 Chat -->
+<div id="chatBox" style="height:150px;overflow:auto;border:1px solid black;"></div>
+<input id="msg" placeholder="Type message">
+<button onclick="sendMsg()">Send</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
